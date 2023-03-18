@@ -15,7 +15,7 @@ jobs:
           touch b.dat
           touch c.dat
       - name: Upload files to an artifact - hardcoded names
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: hardcoded
           path: |
@@ -32,7 +32,7 @@ jobs:
           echo "upload_pattern_separator=${SEPARATOR}" >> ${GITHUB_OUTPUT}
           echo "upload_pattern=${UPLOAD_PATTERN}" >> ${GITHUB_OUTPUT}
       - name: Upload files to an artifact - separated by newline
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: newline
           path: ${{ steps.upload_pattern_1.outputs.upload_pattern }}
@@ -47,7 +47,7 @@ jobs:
           echo "upload_pattern_separator=${SEPARATOR}" >> ${GITHUB_OUTPUT}
           echo "upload_pattern=${UPLOAD_PATTERN}" >> ${GITHUB_OUTPUT}
       - name: Upload files to an artifact - separated by escaped newline
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: newline
           path: ${{ steps.upload_pattern_2.outputs.upload_pattern }}
