@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - "**"
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create two files
+        run: |
+          touch a.txt
+          touch b.dat
+          touch c.dat
+      - name: Upload files to an artifact - hardcoded names
+        uses: actions/upload-artifact@v3
+        with:
+          name: hardcoded
+          path: |
+            *.txt
+            *.dat
