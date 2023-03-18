@@ -36,3 +36,18 @@ jobs:
         with:
           name: newline
           path: ${{ steps.upload_pattern_1.outputs.upload_pattern }}
+      - name: Store patterns as GITHUB_OUTPUT - separated by escaped new line
+        id: upload_pattern_2
+        run: |
+          UPLOAD_PATTERN_ARRAY=('.txt' '*.dat')
+          SEPARATOR="%0A"
+          UPLOAD_PATTERN="$(printf "${SEPARATOR//%/%%}%s" "${UPLOAD_PATTERN_ARRAY[@]}")"
+          UPLOAD_PATTERN="${UPLOAD_PATTERN:${#SEPARATOR}}"
+          echo ${UPLOAD_PATTERN}
+          echo "upload_pattern_separator=${SEPARATOR}" >> ${GITHUB_OUTPUT}
+          echo "upload_pattern=${UPLOAD_PATTERN}" >> ${GITHUB_OUTPUT}
+      - name: Upload files to an artifact - separated by newline
+        uses: actions/upload-artifact@v3
+        with:
+          name: newline
+          path: ${{ steps.upload_pattern_2.outputs.upload_pattern }}
